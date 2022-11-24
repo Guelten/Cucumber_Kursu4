@@ -13,8 +13,9 @@ public class GWD {
 
     private static WebDriver driver;
 
-    public static WebDriver getDriver() {
-        if (driver == null) {
+    public static WebDriver getDriver()
+    {
+        if (driver == null) {  // 1 kere baslat
             //driver i start et doldur, baslat ve gönder
 
             Logger.getLogger("").setLevel(Level.SEVERE);
@@ -42,6 +43,7 @@ public class GWD {
         }catch (InterruptedException e){
             throw new RuntimeException(e);
         }
+
         if (driver != null)  // dolu ise
         {
             driver.quit();
