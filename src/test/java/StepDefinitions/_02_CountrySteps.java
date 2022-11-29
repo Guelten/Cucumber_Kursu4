@@ -32,6 +32,14 @@ public class _02_CountrySteps {
 
     @Then("Success message should be displayed")
     public void successMessageShouldBeDisplayed() {
-        dc.findAndContainsText("successMessage", "success");
+        dc.findAndContainsText("successMessage","success");
+    }
+
+    @When("Create a country name as {string} code as {string}")
+    public void createACountryNameAsCodeAs(String name, String code) {
+        dc.findAndClick("addButton");
+        dc.findAndSend("nameInput", name);
+        dc.findAndSend("codeInput", code);
+        dc.findAndClick("saveButton");
     }
 }

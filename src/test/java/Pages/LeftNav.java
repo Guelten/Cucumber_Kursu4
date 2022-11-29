@@ -21,6 +21,12 @@ public class LeftNav extends Parent{
         @FindBy(xpath ="(//span[text()='Countries'])[1]")
         private WebElement countries;
 
+        @FindBy(xpath ="(//span[text()='Citizenships'])[1]")
+        private WebElement citizenShips;
+
+        @FindBy(xpath = "//span[text()='Nationalities']")
+        private WebElement nationalities;
+
         WebElement myElement;
 
         public void findAndClick(String strElement)
@@ -28,9 +34,11 @@ public class LeftNav extends Parent{
             //element get :burda string isimden weblemente ulaşıcam
             switch (strElement)
             {
-                case "setupOne" : myElement=setupOne;break;
-                case "parameters" : myElement=parameters;break;
-                case "countries" : myElement=countries;break;
+                case "setupOne" : myElement = setupOne;break;
+                case "parameters" : myElement = parameters;break;
+                case "countries" : myElement = countries;break;
+                case "citizenShips" : myElement = citizenShips;break;
+                case "nationalities" : myElement = nationalities;break;
             }
 
             clickFunction(myElement);
