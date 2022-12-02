@@ -1,6 +1,7 @@
 package Pages;
 
 import Utilities.GWD;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -51,6 +52,12 @@ public class Parent {
         wait.until(ExpectedConditions.textToBePresentInElement(element, value));
         Assert.assertTrue(element.getText().toLowerCase().contains(value.toLowerCase()), "The text you searched could'nt not be find");
         new Actions(GWD.getDriver()).sendKeys(Keys.ESCAPE).perform(); // acik dialog kutusu varsa kapansin
+    }
+
+    public void waitUntilLoading()
+    {
+     wait.until(ExpectedConditions.numberOfElementsToBe(By.cssSelector("fuse-progress-bar > *"),0));
+     // progressbar in cocuklari
     }
 }
 
