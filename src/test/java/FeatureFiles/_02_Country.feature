@@ -1,5 +1,6 @@
 Feature: Country Functionaliy
 
+  @SmokeTest
   Scenario: Create Country
     Given Naviagate to Campus
     When Enter username and password and click Login button

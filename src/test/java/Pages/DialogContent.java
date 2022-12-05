@@ -71,6 +71,23 @@ public class DialogContent extends Parent{
     @FindBy(xpath = "(//span[@class='mat-slide-toggle-thumb'])[11]")
     private WebElement toggleBar;
 
+    @FindBy(xpath = "//ms-text-field[@placeholder='GENERAL.FIELD.FIRST_NAME']//input")
+    private WebElement firstnameInput;
+
+    @FindBy(xpath = "//ms-text-field[@placeholder='GENERAL.FIELD.LAST_NAME']//input")
+    private WebElement lastnameInput;
+
+    @FindBy(xpath = "(//span[text()='Female'])")
+    private WebElement genderCode;
+
+    @FindBy(xpath = "(//span[text()=' Active '])")
+    private WebElement statusCode;
+
+    @FindBy(xpath = "(//span[text()=' Other '])")
+    private WebElement employeeTypeCode;
+
+
+
 
 
     WebElement myElement;
@@ -87,6 +104,8 @@ public class DialogContent extends Parent{
             case "searchInput" : myElement = searchInput;break;
             case "integrationCode" : myElement = integrationCode;break;
             case "priorityCode" : myElement = priorityCode;break;
+            case "firstnameInput" : myElement = firstnameInput;break;
+            case "lastnameInput" : myElement = lastnameInput;break;
         }
 
         sendKeysFunction(myElement, value);
@@ -105,6 +124,9 @@ public class DialogContent extends Parent{
             case "deleteButton" : myElement = deleteButton;break;
             case "deleteDialogBtn" : myElement = deleteDialogBtn;break;
             case "toggleBar" : myElement = toggleBar;break;
+            case "genderCode" : myElement = genderCode;break;
+            case "statusCode" : myElement = statusCode;break;
+            case "employeeTypeCode" : myElement = employeeTypeCode;break;
         }
 
         clickFunction(myElement);

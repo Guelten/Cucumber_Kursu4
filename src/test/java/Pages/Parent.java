@@ -49,7 +49,7 @@ public class Parent {
     public void verifyContainsTextFunction(WebElement element, String value)
     {
         //waitUntilVisible(element); // gözükene kadar bekle
-        wait.until(ExpectedConditions.textToBePresentInElement(element, value));
+        wait.until(ExpectedConditions.textToBePresentInElement(element, value));  // success icin calisiyor
         Assert.assertTrue(element.getText().toLowerCase().contains(value.toLowerCase()), "The text you searched could'nt not be find");
         new Actions(GWD.getDriver()).sendKeys(Keys.ESCAPE).perform(); // acik dialog kutusu varsa kapansin
     }

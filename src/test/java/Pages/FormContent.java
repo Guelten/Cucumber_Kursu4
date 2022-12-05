@@ -22,6 +22,15 @@ public class FormContent extends Parent{
     @FindBy(xpath = "(//mat-option[@role='option']/span)[1]")
     private WebElement gradeLevel2;
 
+    @FindBy(xpath = "(//mat-option[@role='option']/span)[1]")
+    private WebElement gradeLevel3;
+
+    @FindBy(xpath = "(//mat-option[@role='option']/span)[1]")
+    private WebElement gradeLevel4;
+
+    @FindBy(xpath = "(//mat-option[@role='option']/span)[1]")
+    private WebElement gradeLevel5;
+
     WebElement myElement;
     public void findAndClick(String strElement){
         //element get : burda string isimden weblemente ulasicam
@@ -30,6 +39,9 @@ public class FormContent extends Parent{
             case "academicPeriod1" : myElement = academicPeriod1;break;
             case "gradeLevel" : myElement = gradeLevel;break;
             case "gradeLevel2" : myElement = gradeLevel2;break;
+            case "gradeLevel3" : myElement = gradeLevel3;break;
+            case "gradeLevel4" : myElement = gradeLevel4;break;
+            case "gradeLevel5" : myElement = gradeLevel5;break;
         }
 
         clickFunction(myElement);
