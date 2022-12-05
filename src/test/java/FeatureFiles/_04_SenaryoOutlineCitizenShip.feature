@@ -13,6 +13,7 @@
       Then User should login successfuly
       And Naviagate to CitizenShip page
 
+      @Regression
       Scenario Outline: CitizenShip Create
         When User a CitizenShip name as "<Name>" short name as "<ShortName>"
         Then Success message should be displayed
