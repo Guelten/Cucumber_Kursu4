@@ -28,7 +28,8 @@ public class Hooks {
 
         if (senaryo.isFailed())
         {
-            byte[] byteHali = ((TakesScreenshot) GWD.getDriver()).getScreenshotAs(OutputType.BYTES);
+            // bunu Extend report ta kullan, diger report (z.B : MasterthoughtReport) icin kapatin.
+            final byte[] byteHali = ((TakesScreenshot) GWD.getDriver()).getScreenshotAs(OutputType.BYTES);
             senaryo.attach(byteHali, "image/png", "screenshot name");
 
 

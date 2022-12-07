@@ -4,15 +4,31 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeDriverService;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.safari.SafariDriver;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class GWD {
 
-    private static WebDriver driver;
+    // ! Paralel static local anlatmadna önce mikroişlemci gelişimini anlatalık, thread e gelelimki
+    // aşağıdaki değişkenler için, thread.Sşeep den bahsedilebilir, pipeline, local ama static eğişken olmalı
+    // pipeline-thread-tread.sleep selenium dedği explicit kullanın biz böyle yaptık.burada thread bazlı static değişken
+    // yaplaıyızı o lokale özel
+
+    // biz burada tüm sistemi static driver üzerine kurduk, bu durumda bize local static lazım thread özel
+
+    //  hem static hemde her thread e özel değişken : static WebDriver1, static Webdriver2
+    private static ThreadLocal<WebDriver> threadDriver=new ThreadLocal<>(); // webDriver 1, webDriver 2
+    public static ThreadLocal<String> threadBrowserName=new ThreadLocal<>(); // Chrome, firefox ...
+
+    // threadDriver.get() -> bulunduğum thread deki drierı verecek
+    // threadDriver.set(driver) -> bulunduğum thread e driver set ediliyor
 
     public static WebDriver getDriver()
     {
@@ -20,41 +36,59 @@ public class GWD {
         Locale.setDefault(new Locale("EN"));
         System.setProperty("user.language", "EN");
 
-        if (driver == null) {  // 1 kere baslat
-            //driver i start et doldur, baslat ve gönder
+        Logger.getLogger("").setLevel(Level.SEVERE);
+        System.setProperty(org.slf4j.simple.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "Error");
 
-            Logger.getLogger("").setLevel(Level.SEVERE);
-            System.setProperty(org.slf4j.simple.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "Error");
-            System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
+        if (threadDriver.get() == null) { // Şu andaki yani bu thread deki driver ım boş mu ?
+            //driverı start et doldur, başlat ve gönder
 
-            WebDriverManager.chromedriver().setup();
-            driver = new ChromeDriver();
+            switch (threadBrowserName.get() )
+            {
+                case "firefox":
+                    //System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE,"/dev/null");
+                    WebDriverManager.firefoxdriver().setup();
+                    threadDriver.set(new FirefoxDriver());
+                    break;
 
+             //   case "safari": // "Safari" laptop ta kurulu olmai
+             //       WebDriverManager.safaridriver().setup();
+             //       threadDriver.set(new SafariDriver());
+             //       break;
 
-            // firefox
-            // WebDriverManager.firefoxdriver().setup();
-            // driver = new FirefoxDriver();
+             //   case "edge":  // "Edge" laptop ta kurulu olmai
+                      //System.setProperty(EdgeDriverService.EDGE_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
+             //       WebDriverManager.edgedriver().setup();
+             //       threadDriver.set(new EdgeDriver());
+             //       break;
 
+                default: // diger testlerimizi direk cali
+
+                    WebDriverManager.chromedriver().setup();
+                    threadDriver.set(new ChromeDriver());
+            }
         }
 
-        return driver;
+        return threadDriver.get();
     }
 
 
     public static void quitDriver()
     {
         try {
-            Thread.sleep(5000);
-        }catch (InterruptedException e){
+            Thread.sleep(5000); // ölmeyecek kullan
+        } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
 
-        if (driver != null)  // dolu ise
+        if (threadDriver.get() != null)
         {
-            driver.quit();
-            driver =null;
+            threadDriver.get().quit();
+            WebDriver driver = threadDriver.get(); driver =null;
+            threadDriver.set(driver);
         }
     }
 
-
+    public static void setThreadBrowserName(String browserName){
+        GWD.threadBrowserName.set(browserName);
+    }
 }
