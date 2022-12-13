@@ -58,16 +58,16 @@ public class GWD {
              //       threadDriver.set(new SafariDriver());
              //       break;
 
-             //   case "edge":  // "Edge" laptop ta kurulu olmai
-                      //System.setProperty(EdgeDriverService.EDGE_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
-             //       WebDriverManager.edgedriver().setup();
-             //       threadDriver.set(new EdgeDriver());
-             //       break;
+                case "edge":  // "Edge" laptop ta kurulu olmai
+                    //System.setProperty(EdgeDriverService.EDGE_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
+                    WebDriverManager.edgedriver().setup();
+                    threadDriver.set(new EdgeDriver());
+                    break;
 
-                default: // diger testlerimizi direk cali
-
+                default: // diğer testlerimizi direk çalıştırırken, XML den parametre gelmeyeceği için default olarak chrome atandı
+                    //System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
                     WebDriverManager.chromedriver().setup();
-                    threadDriver.set(new ChromeDriver());
+                    threadDriver.set(new ChromeDriver()); // bu threade bir webdriver atanıyor
             }
         }
 
@@ -94,4 +94,9 @@ public class GWD {
     public static void setThreadBrowserName(String browserName){
         GWD.threadBrowserName.set(browserName);
     }
+
+    public static String getThreadBrowserName() {
+        return GWD.threadBrowserName.get();
+    }
+
 }

@@ -18,7 +18,7 @@ public class _01_LoginSteps {
     @Given("Naviagate to Campus")
     public void naviagateToCampus() {
 
-        GWD.getDriver().get("https://demo.mersys.io/");
+        GWD.getDriver().get("https://test.mersys.io/");
         GWD.getDriver().manage().window().maximize();
     }
 
@@ -32,8 +32,8 @@ public class _01_LoginSteps {
 //        dc.password.sendKeys("Richfield2020!");
 //        dc.loginButton.click();
 
-        dc.findAndSend("username", "richfield.edu");
-        dc.findAndSend("password"," Richfield2020!");
+        dc.findAndSend("username", "turkeyts");
+        dc.findAndSend("password","TechnoStudy123");
         dc.findAndClick("loginButton");
     }
 

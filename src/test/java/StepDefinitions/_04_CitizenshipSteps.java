@@ -27,6 +27,7 @@ public class _04_CitizenshipSteps {
 
     @Then("Already exist message should be displayed")
     public void alreadyExistMessageShouldBeDisplayed() {
+
         dc.findAndContainsText("alreadyExist", "already");
     }
 
