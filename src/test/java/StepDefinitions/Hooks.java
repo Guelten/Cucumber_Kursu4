@@ -27,8 +27,8 @@ public class Hooks {
     {
         System.out.println("Senaryo bitti");
 
-        LocalDateTime time=LocalDateTime.now();
-        DateTimeFormatter tf= DateTimeFormatter.ofPattern("dd_MM_YYHHmmss");
+        LocalDateTime time = LocalDateTime.now();
+        DateTimeFormatter tf = DateTimeFormatter.ofPattern("dd_MM_YYHHmmss");
 
         // Senaryoların sonuçlarını bir excel formatından yazdırmak istiyorum
         ExcelUtility.writeToExcel("src/test/java/ApachePOI/resource/ScenarioStatus.xlsx",
