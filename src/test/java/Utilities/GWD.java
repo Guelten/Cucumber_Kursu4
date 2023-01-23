@@ -4,6 +4,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeDriverService;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -53,7 +54,7 @@ public class GWD {
                     threadDriver.set(new FirefoxDriver());
                     break;
 
-             //   case "safari": // "Safari" laptop ta kurulu olmai
+             //   case "safari": // "Safari" laptop ta kurulu olmali
              //       WebDriverManager.safaridriver().setup();
              //       threadDriver.set(new SafariDriver());
              //       break;
@@ -67,7 +68,13 @@ public class GWD {
                 default: // diğer testlerimizi direk çalıştırırken, XML den parametre gelmeyeceği için default olarak chrome atandı
                     //System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
                     WebDriverManager.chromedriver().setup();
-                    threadDriver.set(new ChromeDriver()); // bu threade bir webdriver atanıyor
+
+
+                    ChromeOptions options = new ChromeOptions();
+                    options.addArguments("--headless", "--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu", "--window-size=1400,2400");
+
+
+                    threadDriver.set(new ChromeDriver(options)); // bu threade bir webdriver atanıyor
             }
         }
 
