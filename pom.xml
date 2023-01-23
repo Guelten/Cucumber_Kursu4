@@ -96,5 +96,27 @@
     </dependencies>
 
 
+    <!-- Jenkins in Calistirma komutunun, nereyi actiracagini belirledigimiz plugin -->
+    <!-- https://maven.apache.org/surefire/maven-surefire-plugin/examples/inclusion-exclusion.html -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M1</version>
+                <configuration>
+
+                    <includes>
+                        <!-- for run class or classes **/:bulundugu lokasyonu bütün klasörlere göre bulabiliyor -->
+                        <include>**/_04_TestRunnerSmoke.java</include>
+                    </includes>
+
+                </configuration>
+            </plugin>
+        </plugins>
+
+    </build>
+
+
 
 </project>
