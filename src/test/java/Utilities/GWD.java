@@ -69,7 +69,7 @@ public class GWD {
                     //System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
                     WebDriverManager.chromedriver().setup();
 
-
+                    //bu sekilde sadece Jenkins de calistirir (options) (ismi : Maximize)
                     ChromeOptions options = new ChromeOptions();
                     options.addArguments("--headless", "--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu", "--window-size=1400,2400");
 
