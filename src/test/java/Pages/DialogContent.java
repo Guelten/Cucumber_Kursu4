@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 public class DialogContent extends Parent{
     public DialogContent() {
         PageFactory.initElements(GWD.getDriver(),this);
@@ -86,6 +88,8 @@ public class DialogContent extends Parent{
     @FindBy(xpath = "(//span[text()=' Other '])")
     private WebElement employeeTypeCode;
 
+    @FindBy(xpath = "//tbody[@role='rowgroup']/tr/td[2]")
+    public List<WebElement> nameList;
 
 
 
@@ -154,8 +158,10 @@ public class DialogContent extends Parent{
 
         //wait.until(ExpectedConditions.stalenessOf(deleteButton)); stale zamanını yakalayamadım
         //wait.until(ExpectedConditions.numberOfElementsToBeLessThan(By.xpath("//tbody[@role='rowgroup']//tr"),5));
-        // progressbar ın çocukları 0 olana kadar bekle
-        waitUntilLoading();
+
+        // findAndContainsText("searchResultCell", searchText); // arama sonuçlarının ilkinde aranan kelime gözükene kadar bekle.
+
+        waitUntilLoading(); // progressbar ın çocukları 0 olana kadar bekle
 
         findAndClick("deleteButton"); // silme butonua bas, çöp kutusu
         findAndClick("deleteDialogBtn"); // dilogdaki silme butonuna bas

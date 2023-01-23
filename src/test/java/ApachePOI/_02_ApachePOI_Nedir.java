@@ -11,6 +11,6 @@ public class _02_ApachePOI_Nedir {
     *
     * 3- ApachePOI yi nasil kullaniyorsun?
     *    FileInputStream oluşturuyorum. (Dosyayı yani Exceli okuma için açma)
-    *   FileInputStream -> Workbook -> Sheet -> row -> cell ilşki sırasına göre okuyorum.
+    *    FileInputStream -> Workbook -> Sheet -> row -> cell ilşki sırasına göre okuyorum.
     */
 }
