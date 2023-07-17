@@ -69,18 +69,28 @@ public class GWD {
                     //System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
                     WebDriverManager.chromedriver().setup();
 
-                    //bu sekilde sadece Jenkins de calistirir (options) (ismi : Maximize)
-                    ChromeOptions options = new ChromeOptions();
-                    options.addArguments("--headless", "--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu", "--window-size=1400,2400");
-
-
-                    threadDriver.set(new ChromeDriver(options)); // bu threade bir webdriver atanıyor
+                    if (!runningFromIntellij()) {
+                        //bu sekilde sadece Jenkins de calistirir (options) (ismi : Maximize)
+                        ChromeOptions options = new ChromeOptions();
+                        options.addArguments("--headless", "--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu", "--window-size=1400,2400");
+                        threadDriver.set(new ChromeDriver(options));
+                    }
+                    else
+                    threadDriver.set(new ChromeDriver()); // bu threade bir webdriver atanıyor
             }
         }
 
         return threadDriver.get();
     }
 
+    // find out if running from intellij
+    // https://stackoverflow.com/questions/15339148/check-if-java-code-is-running-from-intellij-eclipse-etc-or-command-line
+
+    public static boolean runningFromIntellij()
+    {
+        String classPath = System.getProperty("java.class.path");
+        return classPath.contains("idea_rt.jar");
+    }
 
     public static void quitDriver()
     {
